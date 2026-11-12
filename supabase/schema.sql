@@ -24,6 +24,7 @@ create table if not exists public.roadmap_topics (
   video_title      text,
   video_minutes    int,
   article_url      text,
+  article_title    text,
   article_minutes  int,
   completed        boolean not null default false,
   completed_at     timestamptz
