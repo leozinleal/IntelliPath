@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { getRoadmap, getTopic, listRoadmaps, setTopicCompleted, youtubeUrl } from "../lib/api";
 import { Pomodoro } from "../components/Pomodoro";
+import Quiz from "../components/Quiz";
 
 export default function StudyRoom() {
   const { topicId } = useParams();
@@ -49,6 +50,18 @@ export default function StudyRoom() {
     try {
       await setTopicCompleted(current.id, completed);
       const updated = { ...current, completed };
+      setCurrent(updated);
+      setRoadmap((r) => ({ ...r, topics: r.topics.map((t) => (t.id === updated.id ? updated : t)) }));
+    } catch (err) {
+      alert("Não foi possível salvar: " + err.message);
+    }
+  }
+
+  // Chamado pelo quiz quando o aluno acerta 70% ou mais
+  async function markCompleted() {
+    try {
+      await setTopicCompleted(current.id, true);
+      const updated = { ...current, completed: true };
       setCurrent(updated);
       setRoadmap((r) => ({ ...r, topics: r.topics.map((t) => (t.id === updated.id ? updated : t)) }));
     } catch (err) {
@@ -112,6 +125,9 @@ export default function StudyRoom() {
             <span className="muted small">Nenhum artigo encontrado para este tópico.</span>
           )}
         </div>
+
+        {/* key: recria o quiz do zero ao trocar de tópico */}
+        <Quiz key={current.id} topic={current} roadmap={roadmap} onPassed={markCompleted} />
       </section>
 
       <aside>

@@ -10,6 +10,7 @@ e marca o **progresso**.
 | 2. Cronômetro Pomodoro | `src/components/Pomodoro.jsx` |
 | 3. Links de videoaulas e artigos | `src/pages/Roadmap.jsx` e `src/pages/StudyRoom.jsx` |
 | 4. Marcar progresso dos tópicos | checkbox em `Roadmap.jsx` / `StudyRoom.jsx` → tabela `roadmap_topics` |
+| 5. Atividade (quiz) por tópico | `src/components/Quiz.jsx` → `supabase/functions/generate-quiz` → tabelas `quiz_questions` e `quiz_attempts` |
 
 ## Como funciona (arquitetura)
 
@@ -137,6 +138,8 @@ deploy direto do GitHub) — fica para a próxima etapa.
 
 ## Próximas etapas sugeridas
 1. Deploy do frontend (Vercel/Netlify) e ajuste de URL no Supabase Auth.
-2. Artigos reais (ex.: busca na Wikipédia/Dev.to) no lugar do link de busca.
-3. Streak de dias estudados e histórico de ciclos Pomodoro no banco.
-4. Design final conforme as telas de referência.
+2. ✅ Artigos reais da Wikipédia (`supabase/002_article_title.sql`).
+3. ✅ Quiz por tópico (`supabase/003_quiz.sql` + função `generate-quiz`).
+4. Quiz final da trilha (usa as perguntas já salvas em `quiz_questions`).
+5. Streak de dias estudados e histórico de ciclos Pomodoro no banco.
+6. Design final conforme as telas de referência.
